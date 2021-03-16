@@ -55,7 +55,16 @@ public class AdapterUsers extends RecyclerView.Adapter<AdapterUsers.MyHolder> {
         }
         catch (Exception e){
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+
+                            Intent intent=new Intent(context, ChatActivity.class);
+                            intent.putExtra("uid",hisuid);
+                            context.startActivity(intent);
+                        }
+        });
     }
 
 
