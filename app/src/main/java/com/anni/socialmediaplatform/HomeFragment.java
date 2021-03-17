@@ -158,7 +158,8 @@ AdapterPosts adapterPosts;
 
         if(item.getItemId()==R.id.logout){
             firebaseAuth.signOut();
-
+            startActivity(new Intent(getContext(), SpalshScreen.class));
+            getActivity().finish();
         }
 
         return super.onOptionsItemSelected(item);

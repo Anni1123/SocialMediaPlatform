@@ -69,7 +69,7 @@
             android:id="@+id/descript"/>
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="wrap_content"
             android:id="@+id/pimagetv"
             android:background="@color/colorWhite"/>
         <LinearLayout

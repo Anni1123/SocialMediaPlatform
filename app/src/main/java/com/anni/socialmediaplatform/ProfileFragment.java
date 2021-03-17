@@ -74,11 +74,23 @@ public class ProfileFragment extends Fragment {
     FirebaseUser firebaseUser;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-    ImageView avatartv;
-    TextView nam,email;
+    ImageView avatartv,covertv;
+    TextView nam,email,phone;
     RecyclerView postrecycle;
+    StorageReference storageReference;
+    String storagepath="Users_Profile_Cover_image/";
     FloatingActionButton fab;
+    List<ModelPost> posts;
+    AdapterPosts adapterPosts;
+    String uid;
     ProgressDialog pd;
+    private static final int CAMERA_REQUEST=100;
+    private static final int STORAGE_REQUEST=200;
+    private static final int IMAGEPICK_GALLERY_REQUEST=300;
+    private static final int IMAGE_PICKCAMERA_REQUEST=400;
+    String cameraPermission[];
+    String storagePermission[];
+    Uri imageuri;
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -96,9 +108,12 @@ public class ProfileFragment extends Fragment {
         avatartv=view.findViewById(R.id.avatartv);
         nam=view.findViewById(R.id.nametv);
         email=view.findViewById(R.id.emailtv);
+        uid=FirebaseAuth.getInstance().getUid();
         fab=view.findViewById(R.id.fab);
         postrecycle=view.findViewById(R.id.recyclerposts);
+        posts=new ArrayList<>();
         pd=new ProgressDialog(getActivity());
+        loadMyPosts();
         pd.setCanceledOnTouchOutside(false);
         Query query=databaseReference.orderByChild("email").equalTo(firebaseUser.getEmail());
         query.addValueEventListener(new ValueEventListener() {
@@ -133,7 +148,34 @@ public class ProfileFragment extends Fragment {
         });
         return view;
     }
+    private void loadMyPosts() {
+        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
+        layoutManager.setReverseLayout(true);
+        layoutManager.setStackFromEnd(true);
+        postrecycle.setLayoutManager(layoutManager);
 
+        DatabaseReference databaseReference=FirebaseDatabase.getInstance().getReference("Posts");
+        Query query=databaseReference.orderByChild("uid").equalTo(uid);
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                posts.clear();
+                for (DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                    ModelPost modelPost=dataSnapshot1.getValue(ModelPost.class);
+                    posts.add(modelPost);
+                    adapterPosts=new AdapterPosts(getActivity(),posts);
+                    postrecycle.setAdapter(adapterPosts);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                Toast.makeText(getActivity(),databaseError.getMessage(),Toast.LENGTH_LONG).show();
+            }
+        });
+    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {

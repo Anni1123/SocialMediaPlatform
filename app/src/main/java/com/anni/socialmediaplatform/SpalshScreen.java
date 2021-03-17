@@ -28,6 +28,7 @@ public class SpalshScreen extends AppCompatActivity {
                 FirebaseUser user=mAuth.getCurrentUser();
                 if(user==null){
                     Intent intent = new Intent(SpalshScreen.this, LoginActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
                 }

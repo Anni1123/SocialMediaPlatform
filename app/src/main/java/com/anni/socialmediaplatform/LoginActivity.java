@@ -60,23 +60,7 @@ public class LoginActivity extends AppCompatActivity {
         if (mAuth !=null) {
             currentUser = mAuth.getCurrentUser();
         }
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                FirebaseUser user=mAuth.getCurrentUser();
-                if(user==null){
-                    Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
-                else {
-                    Intent mainIntent= new Intent(LoginActivity.this, DashboardActivity.class);
-                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(mainIntent);
-                    finish();
-                }
-            }
-        },1000);
+       
         mlogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

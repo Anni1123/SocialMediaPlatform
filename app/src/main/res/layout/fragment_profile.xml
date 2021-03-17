@@ -5,10 +5,9 @@
     android:background="#F1EDED"
     android:layout_height="match_parent"
     tools:context=".ProfileFragment">
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+
         <RelativeLayout
+            android:id="@+id/r1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <ImageView
@@ -58,13 +57,19 @@
                         android:layout_marginLeft="5dp"/>
                 </LinearLayout>
             </LinearLayout>
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recyclerposts"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_below="@id/linearLayout"/>
+
         </RelativeLayout>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/r1"
+        android:layout_height="wrap_content">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerposts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/linearLayout"/>
     </ScrollView>
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
