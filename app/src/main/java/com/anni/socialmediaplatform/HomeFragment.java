@@ -84,7 +84,6 @@ AdapterPosts adapterPosts;
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                Toast.makeText(getActivity(),databaseError.getMessage(),Toast.LENGTH_LONG).show();
             }
         });
     }

@@ -41,19 +41,22 @@
             android:textColor="@color/colorBlack"
             android:layout_toEndOf="@id/profileimage"
             android:layout_toRightOf="@id/profileimage"/>
+
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:id="@+id/blocking"
+            android:layout_width="wrap_content"
+            android:layout_height="14dp"
+            android:visibility="gone"
             android:layout_alignParentEnd="true"
-            android:src="@drawable/ic_unblock"/>
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_unblock" />
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:id="@+id/seen"
             android:layout_below="@id/blocking"
+            android:visibility="gone"
             android:layout_alignParentEnd="true"
             android:src="@drawable/ic_unblock"/>
     </RelativeLayout>
